@@ -20,15 +20,15 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <parent>
     <groupId>org.bitcoinj</groupId>
-    <artifactId>namecoinj-parent</artifactId>
+    <artifactId>unobtaniumj-parent</artifactId>
     <version>0.12.2</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>namecoinj-tools</artifactId>
+  <artifactId>unobtaniumj-tools</artifactId>
 
-  <name>namecoinj Tools</name>
-  <description>A collection of useful tools that use the namecoinj library to perform wallet operations</description>
+  <name>unobtaniumj Tools</name>
+  <description>A collection of useful tools that use the unobtaniumj library to perform wallet operations</description>
 
   <build>
 
@@ -75,7 +75,7 @@
   <dependencies>
     <dependency>
       <groupId>org.bitcoinj</groupId>
-      <artifactId>namecoinj-core</artifactId>
+      <artifactId>unobtaniumj-core</artifactId>
       <version>${project.parent.version}</version>
     </dependency>
     <dependency>

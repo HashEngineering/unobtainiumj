@@ -741,7 +741,7 @@ public class Block extends Message {
         else
         {
             if(mmBlock != null && mmBlock.IsValid())
-                throw new VerificationException("Merged-mine block was found before merged-mining was turned on at time: " + BlockMergeMined.MERGED_MINE_START_TIME + "(Block 25000)");
+                throw new VerificationException("Merged-mine block was found before merged-mining was turned on at time: " + BlockMergeMined.MERGED_MINE_START_TIME + "(Block 600000)");
             hash = getHash().toBigInteger();
         }
 

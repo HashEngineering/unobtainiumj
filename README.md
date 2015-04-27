@@ -1,8 +1,8 @@
 Build status: [![Build Status](https://travis-ci.org/bitcoinj/bitcoinj.png?branch=master)](https://travis-ci.org/bitcoinj/bitcoinj)
 
-### Welcome to namecoinj
+### Welcome to unobtaniumj
 
-The namecoinj library is a Java implementation of the Namecoin protocol, which allows it to maintain a wallet and send/receive transactions without needing a local copy of Bitcoin Core. It comes with full documentation and some example apps showing how to use it.
+The unobtaniumj library is a Java implementation of the Namecoin protocol, which allows it to maintain a wallet and send/receive transactions without needing a local copy of Bitcoin Core. It comes with full documentation and some example apps showing how to use it.
 
 ### Technologies
 

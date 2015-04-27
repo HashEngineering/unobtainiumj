@@ -34,10 +34,11 @@ import java.util.Date;
  */
 public class BlockMergeMined {
     private static final Logger log = LoggerFactory.getLogger(BlockMergeMined.class);
-    public static final long MERGED_MINE_START_TIME = 0;
+    public static final long MERGED_MINE_START_TIME = 1430114278;
     public static final long BLOCK_VERSION_AUXPOW = (1 << 8);
     public static final long BLOCK_VERSION_CHAIN_START = (1 << 16);
-    public static final long MERGED_MINE_CHAIN_ID = 0x0001;
+    public static final long BLOCK_VERSION_CHAIN_END   = (1 << 30);
+    public static final long MERGED_MINE_CHAIN_ID = 0x0075;     //0x0001
     public static final byte pchMergedMiningHeader[] = { (byte)0xfa, (byte)0xbe, 'm', 'm' } ;
     // Fields defined as part of the protocol format.
     // modifiers
@@ -136,7 +137,7 @@ public class BlockMergeMined {
     protected boolean checkProofOfWork(boolean throwException) throws VerificationException {
         if(GetChainID() != MERGED_MINE_CHAIN_ID)
         {
-            throw new VerificationException("Merged-mine block does not have the correct chain ID required for Devcoin blocks, Current ID: " + GetChainID() + " Expected: " + MERGED_MINE_CHAIN_ID);
+            throw new VerificationException("Merged-mine block does not have the correct chain ID required for UNO blocks, Current ID: " + GetChainID() + " Expected: " + MERGED_MINE_CHAIN_ID);
         }
         if(GetChainID(payload.parentBlockHeader.getVersion()) == MERGED_MINE_CHAIN_ID)
         {
