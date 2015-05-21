@@ -14,7 +14,7 @@ public class CoinDefinition {
 
 
     public static final String coinName = "Unobtainium";
-    public static final String coinTicker = "NMC";
+    public static final String coinTicker = "UNO";
     public static final String coinURIScheme = "unobtanium";
     public static final String cryptsyMarketId = "133";
     public static final String cryptsyMarketCurrency = "UNO";
@@ -90,7 +90,7 @@ public class CoinDefinition {
     public static final Coin DEFAULT_MIN_TX_FEE = Coin.valueOf(500000);   // MIN_TX_FEE
     public static final Coin DUST_LIMIT = Coin.valueOf(10000); //main.h CTransaction::GetMinFee        0.01 coins
 
-    public static final int PROTOCOL_VERSION = 60000;          //version.h PROTOCOL_VERSION
+    public static final int PROTOCOL_VERSION = 70002;          //version.h PROTOCOL_VERSION
     public static final int MIN_PROTOCOL_VERSION = 209;        //version.h MIN_PROTO_VERSION
     public static final int INIT_PROTO_VERSION = 209;            //version.h
 

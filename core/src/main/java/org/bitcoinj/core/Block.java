@@ -436,6 +436,12 @@ public class Block extends Message {
         Utils.uint32ToByteStreamLE(time, stream);
         Utils.uint32ToByteStreamLE(difficultyTarget, stream);
         Utils.uint32ToByteStreamLE(nonce, stream);
+
+        //TODO::Add auxpow writing here
+        if(mmBlock != null)
+        {
+            //mmBlock.bitcoinSerialize()
+        }
     }
 
     private void writeTransactions(OutputStream stream) throws IOException {
@@ -727,7 +733,7 @@ public class Block extends Message {
         BigInteger target = getDifficultyTargetAsInteger();
         BigInteger hash;
         // merged-mined
-        if(time >= BlockMergeMined.MERGED_MINE_START_TIME)
+        if(true /*time >= BlockMergeMined.MERGED_MINE_START_TIME*/)
         {
             if(mmBlock != null && mmBlock.IsValid())
             {
