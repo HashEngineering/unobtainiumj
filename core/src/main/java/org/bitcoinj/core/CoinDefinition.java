@@ -13,7 +13,7 @@ import java.util.Map;
 public class CoinDefinition {
 
 
-    public static final String coinName = "Unobtainium";
+    public static final String coinName = "Unobtanium";
     public static final String coinTicker = "UNO";
     public static final String coinURIScheme = "unobtanium";
     public static final String cryptsyMarketId = "133";
@@ -87,11 +87,11 @@ public class CoinDefinition {
     public static final int MAX_COINS = 250000;                 //main.h:  MAX_MONEY
 
 
-    public static final Coin DEFAULT_MIN_TX_FEE = Coin.valueOf(500000);   // MIN_TX_FEE
-    public static final Coin DUST_LIMIT = Coin.valueOf(10000); //main.h CTransaction::GetMinFee        0.01 coins
+    public static final Coin DEFAULT_MIN_TX_FEE = Coin.valueOf(1000);   // MIN_TX_FEE
+    public static final Coin DUST_LIMIT = Coin.valueOf(1000); //main.h CTransaction::GetMinFee        0.01 coins
 
     public static final int PROTOCOL_VERSION = 70002;          //version.h PROTOCOL_VERSION
-    public static final int MIN_PROTOCOL_VERSION = 209;        //version.h MIN_PROTO_VERSION
+    public static final int MIN_PROTOCOL_VERSION = 70002;        //version.h MIN_PROTO_VERSION
     public static final int INIT_PROTO_VERSION = 209;            //version.h
 
     public static final int BLOCK_CURRENTVERSION = 1;   //CBlock::CURRENT_VERSION
