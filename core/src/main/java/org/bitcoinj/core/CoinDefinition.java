@@ -18,8 +18,8 @@ public class CoinDefinition {
     public static final String coinURIScheme = "unobtanium";
     public static final String cryptsyMarketId = "133";
     public static final String cryptsyMarketCurrency = "UNO";
-    public static final String PATTERN_PRIVATE_KEY_START = "[56]";
-    public static final String PATTERN_PRIVATE_KEY_START_COMPRESSED = "[KL]";
+    public static final String PATTERN_PRIVATE_KEY_START = "[8]";
+    public static final String PATTERN_PRIVATE_KEY_START_COMPRESSED = "[a]";
     public static final String PATTERN_PRIVATE_KEY_START_TESTNET = "9";
     public static final String PATTERN_PRIVATE_KEY_START_COMPRESSED_TESTNET = "c";
 

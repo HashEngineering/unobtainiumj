@@ -92,6 +92,8 @@ public class BitcoinURI {
     public static final String FIELD_PAYMENT_REQUEST_URL = "r";
 
     public static final String BITCOIN_SCHEME = CoinDefinition.coinURIScheme;
+    public static final String BITCOIN_SCHEME2 = "bitcoin";
+
     private static final String ENCODED_SPACE_CHARACTER = "%20";
     private static final String AMPERSAND_SEPARATOR = "&";
     private static final String QUESTION_MARK_SEPARATOR = "?";
@@ -145,12 +147,18 @@ public class BitcoinURI {
 
         String scheme1 = BITCOIN_SCHEME + "://";
         String scheme2 = BITCOIN_SCHEME + ":";
+        String scheme1a= BITCOIN_SCHEME2 + "://";
+        String scheme2a= BITCOIN_SCHEME2 + ":";
 
         if (input.startsWith(scheme1)) {
             schemeSpecificPart = input.substring(scheme1.length());
         } else if (input.startsWith(scheme2)) {
             schemeSpecificPart = input.substring(scheme2.length());
-        } else {
+        } else if (input.startsWith(scheme1a)) {
+            schemeSpecificPart = input.substring(scheme1a.length());
+        }else if (input.startsWith(scheme2a)) {
+            schemeSpecificPart = input.substring(scheme2a.length());
+        }else {
             throw new BitcoinURIParseException("Unsupported URI scheme: " + uri.getScheme());
         }
 

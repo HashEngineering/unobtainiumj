@@ -970,8 +970,8 @@ public abstract class AbstractBlockChain {
         double				EventHorizonDeviationFast;
         double				EventHorizonDeviationSlow;
 
-        long start = System.currentTimeMillis();
-        long endLoop = 0;
+        //long start = System.currentTimeMillis();
+        //long endLoop = 0;
 
         if (BlockLastSolved == null || BlockLastSolved.getHeight() == 0 || (long)BlockLastSolved.getHeight() < PastBlocksMin)
         { verifyDifficulty(params.getMaxTarget(), nextBlock); }
@@ -979,9 +979,9 @@ public abstract class AbstractBlockChain {
         int i = 0;
         //log.info("KGW: i = {}; height = {}; hash {} ", i, BlockReading.getHeight(), BlockReading.getHeader().getHashAsString());
 
-        long totalCalcTime = 0;
-        long totalReadtime = 0;
-        long totalBigIntTime = 0;
+        //long totalCalcTime = 0;
+        //long totalReadtime = 0;
+        //long totalBigIntTime = 0;
 
 
         for (i = 1; BlockReading != null && BlockReading.getHeight() > 0; i++) {
@@ -991,7 +991,7 @@ public abstract class AbstractBlockChain {
                 break;
             }
             PastBlocksMass++;
-            BigInteger PastDifficultyAverageN = new BigInteger("0");
+            //BigInteger PastDifficultyAverageN = new BigInteger("0");
             if (i == 1)	{ PastDifficultyAverage = BlockReading.getHeader().getDifficultyTargetAsInteger(); }
             else
             {
@@ -1000,7 +1000,7 @@ public abstract class AbstractBlockChain {
             PastDifficultyAveragePrev = PastDifficultyAverage;
 
             long diff = System.currentTimeMillis();
-            totalBigIntTime += diff - startLoop;
+            //totalBigIntTime += diff - startLoop;
 
             PastRateActualSeconds			= BlockLastSolved.getHeader().getTimeSeconds() - BlockReading.getHeader().getTimeSeconds();
             PastRateTargetSeconds			= TargetBlocksSpacingSeconds * PastBlocksMass;
@@ -1031,10 +1031,10 @@ public abstract class AbstractBlockChain {
             }
             //log.info("KGW: i = {}; height = {}; hash {} ", i, BlockReadingPrev.getHeight(), BlockReadingPrev.getHeader().getHashAsString());
             BlockReading = BlockReadingPrev;
-            endLoop = System.currentTimeMillis();
+            //endLoop = System.currentTimeMillis();
             //log.info("KGW: i = {}; height = {}; total time {}=calc {}+read {}", i, BlockReadingPrev.getHeight(), endLoop - startLoop, calcTime - startLoop, endLoop-calcTime);
-            totalCalcTime += calcTime - startLoop;
-            totalReadtime += endLoop-calcTime;
+            //totalCalcTime += calcTime - startLoop;
+            //totalReadtime += endLoop-calcTime;
         }
 
         /*CBigNum bnNew(PastDifficultyAverage);
@@ -1062,134 +1062,7 @@ public abstract class AbstractBlockChain {
 
     }
 
-    private void KimotoGravityWell_N(StoredBlock storedPrev, Block nextBlock, long TargetBlocksSpacingSeconds, long PastBlocksMin, long PastBlocksMax)  throws BlockStoreException, VerificationException {
-	/* current difficulty formula, megacoin - kimoto gravity well */
-        //const CBlockIndex  *BlockLastSolved				= pindexLast;
-        //const CBlockIndex  *BlockReading				= pindexLast;
-        //const CBlockHeader *BlockCreating				= pblock;
-        StoredBlock         BlockLastSolved             = storedPrev;
-        StoredBlock         BlockReading                = storedPrev;
-        Block               BlockCreating               = nextBlock;
-
-        /*
-        BlockCreating				= BlockCreating;
-
-        long				PastBlocksMass				= 0;
-        long				PastRateActualSeconds		= 0;
-        long				PastRateTargetSeconds		= 0;
-        double				PastRateAdjustmentRatio		= 1f;
-        BigInteger			PastDifficultyAverage = BigInteger.valueOf(0);
-        BigInteger			PastDifficultyAveragePrev = BigInteger.valueOf(0);;
-        double				EventHorizonDeviation;
-        double				EventHorizonDeviationFast;
-        double				EventHorizonDeviationSlow;
-        */
-        long start = System.currentTimeMillis();
-        long endLoop = 0;
-
-        if (BlockLastSolved == null || BlockLastSolved.getHeight() == 0 || (long)BlockLastSolved.getHeight() < PastBlocksMin)
-        { verifyDifficulty(params.getMaxTarget(), nextBlock); }
-
-        int i = 0;
-        //log.info("KGW: i = {}; height = {}; hash {} ", i, BlockReading.getHeight(), BlockReading.getHeader().getHashAsString());
-
-        long totalCalcTime = 0;
-        long totalReadtime = 0;
-        long totalBigIntTime = 0;
-
-        int init_result = kgw.KimotoGravityWell_init(TargetBlocksSpacingSeconds, PastBlocksMin, PastBlocksMax, 28.2);
-
-
-        for (i = 1; BlockReading != null && BlockReading.getHeight() > 0; i++) {
-            long startLoop = System.currentTimeMillis();
-            int result = kgw.KimotoGravityWell_loop(i, BlockReading.getHeader().getDifficultyTargetAsInteger().toByteArray(),BlockReading.getHeight(), BlockReading.getHeader().getTimeSeconds(), BlockLastSolved.getHeader().getTimeSeconds());
-
-            //if(i == 1)
-            //log.info("KGW-N: difficulty of i=1:%x->{}",  BlockReading.getHeader().getDifficultyTarget(), BlockReading.getHeader().getDifficultyTargetAsInteger().toString(16));
-            //    log.info("KGW-N: difficulty of i=1: " + BlockReading.getHeader().getDifficultyTarget() + "->" + BlockReading.getHeader().getDifficultyTargetAsInteger().toString(16));
-            if(result == 1)
-                break;
-            if(result == 2)
-                return;
-            /*
-            if (PastBlocksMax > 0 && i > PastBlocksMax)
-            {
-                break;
-            }
-            PastBlocksMass++;
-            BigInteger PastDifficultyAverageN = new BigInteger("0");
-            if (i == 1)	{ PastDifficultyAverage = BlockReading.getHeader().getDifficultyTargetAsInteger(); }
-            else
-            {
-                //PastDifficultyAverage = ((BlockReading.getHeader().getDifficultyTargetAsInteger().subtract(PastDifficultyAveragePrev)).divide(BigInteger.valueOf(i)).add(PastDifficultyAveragePrev));
-            }
-            PastDifficultyAveragePrev = PastDifficultyAverage;
-
-            long diff = System.currentTimeMillis();
-            totalBigIntTime += diff - startLoop;
-
-            PastRateActualSeconds			= BlockLastSolved.getHeader().getTimeSeconds() - BlockReading.getHeader().getTimeSeconds();
-            PastRateTargetSeconds			= TargetBlocksSpacingSeconds * PastBlocksMass;
-            PastRateAdjustmentRatio			= 1.0f;
-            if (PastRateActualSeconds < 0) { PastRateActualSeconds = 0; }
-            if (PastRateActualSeconds != 0 && PastRateTargetSeconds != 0) {
-                PastRateAdjustmentRatio			= (double)PastRateTargetSeconds / PastRateActualSeconds;
-            }
-            EventHorizonDeviation			= 1 + (0.7084 * java.lang.Math.pow((Double.valueOf(PastBlocksMass)/Double.valueOf(144)), -1.228));
-            EventHorizonDeviationFast		= EventHorizonDeviation;
-            EventHorizonDeviationSlow		= 1 / EventHorizonDeviation;
-
-            if (PastBlocksMass >= PastBlocksMin) {
-                if ((PastRateAdjustmentRatio <= EventHorizonDeviationSlow) || (PastRateAdjustmentRatio >= EventHorizonDeviationFast))
-                {
-                    //assert(BlockReading);
-                    break;
-                }
-            }*/
-            long calcTime = System.currentTimeMillis();
-            StoredBlock BlockReadingPrev = blockStore.get(BlockReading.getHeader().getPrevBlockHash());
-            if (BlockReadingPrev == null)
-            {
-                //If this is triggered, then we are using checkpoints and haven't downloaded enough blocks to verify the difficulty.
-                //assert(BlockReading);     //from C++ code
-                //break;                    //from C++ code
-                return;
-            }
-            //log.info("KGW: i = {}; height = {}; hash {} ", i, BlockReadingPrev.getHeight(), BlockReadingPrev.getHeader().getHashAsString());
-            BlockReading = BlockReadingPrev;
-            endLoop = System.currentTimeMillis();
-            //log.info("KGW-N: i = {}; height = {}; total time {}=calc {}+read {}", i, BlockReadingPrev.getHeight(), endLoop - startLoop, calcTime - startLoop, endLoop-calcTime);
-            totalCalcTime += calcTime - startLoop;
-            totalReadtime += endLoop-calcTime;
-        }
-
-        /*CBigNum bnNew(PastDifficultyAverage);
-        if (PastRateActualSeconds != 0 && PastRateTargetSeconds != 0) {
-            bnNew *= PastRateActualSeconds;
-            bnNew /= PastRateTargetSeconds;
-        } */
-        //log.info("KGW iterations: {}, rewinding from {} to {}; time {}", i, BlockReading.getHeight(), storedPrev.getHeight()+1, endLoop - start);
-        //log.info("KGW-N: i = {}; height = {}; total time {}=calc {}+read {}", i, storedPrev.getHeight(), System.currentTimeMillis() - start, totalCalcTime, totalReadtime /*, totalBigIntTime, totalCalcTime-totalBigIntTime*/);
-        //log.info("KGW-N, {}, {}, {}", storedPrev.getHeight(), i, System.currentTimeMillis() - start);
-        /*BigInteger newDifficulty = PastDifficultyAverage;
-        if (PastRateActualSeconds != 0 && PastRateTargetSeconds != 0) {
-            newDifficulty = newDifficulty.multiply(BigInteger.valueOf(PastRateActualSeconds));
-            newDifficulty = newDifficulty.divide(BigInteger.valueOf(PastRateTargetSeconds));
-        }*/
-
-        BigInteger newDifficulty = new BigInteger(kgw.KimotoGravityWell_close());
-
-        if (newDifficulty.compareTo(params.getMaxTarget()) > 0) {
-            log.info("Difficulty hit proof of work limit: {}", newDifficulty.toString(16));
-            newDifficulty = params.getMaxTarget();
-        }
-
-
-        //log.info("KGW-N Difficulty Calculated: {}", newDifficulty.toString(16));
-        verifyDifficulty(newDifficulty, nextBlock);
-
-    }
-    private void KimotoGravityWell_N2(StoredBlock storedPrev, Block nextBlock, long TargetBlocksSpacingSeconds, long PastBlocksMin, long PastBlocksMax)  throws BlockStoreException, VerificationException {
+        private void KimotoGravityWell_N2(StoredBlock storedPrev, Block nextBlock, long TargetBlocksSpacingSeconds, long PastBlocksMin, long PastBlocksMax)  throws BlockStoreException, VerificationException {
 	/* current difficulty formula, megacoin - kimoto gravity well */
         //const CBlockIndex  *BlockLastSolved				= pindexLast;
         //const CBlockIndex  *BlockReading				= pindexLast;
@@ -1235,41 +1108,7 @@ public abstract class AbstractBlockChain {
                 break;
             if(result == 2)
                 return;
-            /*
-            if (PastBlocksMax > 0 && i > PastBlocksMax)
-            {
-                break;
-            }
-            PastBlocksMass++;
-            BigInteger PastDifficultyAverageN = new BigInteger("0");
-            if (i == 1)	{ PastDifficultyAverage = BlockReading.getHeader().getDifficultyTargetAsInteger(); }
-            else
-            {
-                //PastDifficultyAverage = ((BlockReading.getHeader().getDifficultyTargetAsInteger().subtract(PastDifficultyAveragePrev)).divide(BigInteger.valueOf(i)).add(PastDifficultyAveragePrev));
-            }
-            PastDifficultyAveragePrev = PastDifficultyAverage;
 
-            long diff = System.currentTimeMillis();
-            totalBigIntTime += diff - startLoop;
-
-            PastRateActualSeconds			= BlockLastSolved.getHeader().getTimeSeconds() - BlockReading.getHeader().getTimeSeconds();
-            PastRateTargetSeconds			= TargetBlocksSpacingSeconds * PastBlocksMass;
-            PastRateAdjustmentRatio			= 1.0f;
-            if (PastRateActualSeconds < 0) { PastRateActualSeconds = 0; }
-            if (PastRateActualSeconds != 0 && PastRateTargetSeconds != 0) {
-                PastRateAdjustmentRatio			= (double)PastRateTargetSeconds / PastRateActualSeconds;
-            }
-            EventHorizonDeviation			= 1 + (0.7084 * java.lang.Math.pow((Double.valueOf(PastBlocksMass)/Double.valueOf(144)), -1.228));
-            EventHorizonDeviationFast		= EventHorizonDeviation;
-            EventHorizonDeviationSlow		= 1 / EventHorizonDeviation;
-
-            if (PastBlocksMass >= PastBlocksMin) {
-                if ((PastRateAdjustmentRatio <= EventHorizonDeviationSlow) || (PastRateAdjustmentRatio >= EventHorizonDeviationFast))
-                {
-                    //assert(BlockReading);
-                    break;
-                }
-            }*/
             long calcTime = System.currentTimeMillis();
             StoredBlock BlockReadingPrev = blockStore.get(BlockReading.getHeader().getPrevBlockHash());
             if (BlockReadingPrev == null)
@@ -1286,20 +1125,6 @@ public abstract class AbstractBlockChain {
             totalCalcTime += calcTime - startLoop;
             totalReadtime += endLoop-calcTime;
         }
-
-        /*CBigNum bnNew(PastDifficultyAverage);
-        if (PastRateActualSeconds != 0 && PastRateTargetSeconds != 0) {
-            bnNew *= PastRateActualSeconds;
-            bnNew /= PastRateTargetSeconds;
-        } */
-        //log.info("KGW iterations: {}, rewinding from {} to {}; time {}", i, BlockReading.getHeight(), storedPrev.getHeight()+1, endLoop - start);
-        //log.info("KGW-N: i = {}; height = {}; total time {}=calc {}+read {}", i, storedPrev.getHeight(), System.currentTimeMillis() - start, totalCalcTime, totalReadtime /*, totalBigIntTime, totalCalcTime-totalBigIntTime*/);
-        //log.info("KGW-N2, {}, {}, {}", storedPrev.getHeight(), i, System.currentTimeMillis() - start);
-        /*BigInteger newDifficulty = PastDifficultyAverage;
-        if (PastRateActualSeconds != 0 && PastRateTargetSeconds != 0) {
-            newDifficulty = newDifficulty.multiply(BigInteger.valueOf(PastRateActualSeconds));
-            newDifficulty = newDifficulty.divide(BigInteger.valueOf(PastRateTargetSeconds));
-        }*/
 
         BigInteger newDifficulty = new BigInteger(kgw.KimotoGravityWell_close());
 
