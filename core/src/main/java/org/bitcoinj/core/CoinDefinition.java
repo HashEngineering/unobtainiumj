@@ -127,10 +127,12 @@ public class CoinDefinition {
 
     //static public String genesisMerkleRoot = "3ce968df58f9c8a752306c4b7264afab93149dbc578bd08a42c446caaa6628bb";
 
-
+    //https://github.com/unobtanium-official/Unobtanium/blob/master/src/chainparams.cpp#L153
     //net.cpp strDNSSeed
     static public String[] dnsSeeds = new String[] {
-            "104.131.25.221",
+            "23skidoo.info",
+            "rockchain.info",
+            /*"104.131.25.221",
             "108.61.10.90",
             "137.135.57.119",
             "144.76.239.66",
@@ -142,9 +144,23 @@ public class CoinDefinition {
             "192.241.254.222",
             "198.199.97.43",
             "128.199.174.196",
-            "rockchain.info",
-            "seed1.coinlab.info",
-            "seed3.coinlab.info"
+            "rockchain.info",*/
+
+    "107.170.63.157",
+    "192.241.254.222",
+    "198.199.97.43",
+    "128.199.174.196",
+    "108.61.10.90",
+    "96.19.216.113",
+    "81.205.30.207",
+    "192.95.29.153",
+    "188.138.94.6",
+    "162.216.4.199",
+    "158.255.89.244",
+    "69.197.61.58",
+    "159.118.11.101",
+    "144.76.64.123",
+    "144.76.239.66",
     };
 
     public static int minBroadcastConnections = 1;   //0 for default; we need more peers.
