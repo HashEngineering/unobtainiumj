@@ -54,6 +54,20 @@ public class BlockMergeMined {
         payload = new BlockMergeMinedPayload(this.params, payloadBytes, cursor, block);
         setBlock(block);
     }
+    private BlockMergeMined()
+        {
+
+        }
+        public BlockMergeMined duplicate()
+        {
+            BlockMergeMined mmblock = new BlockMergeMined();
+
+            mmblock.params = params;
+            mmblock.payload = payload;
+            mmblock.setBlock(block);
+            return mmblock;
+    }
+
     private void setBlock(Block block)
     {
         this.block = block;
