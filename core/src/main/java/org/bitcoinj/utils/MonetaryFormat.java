@@ -56,11 +56,11 @@ public final class MonetaryFormat {
     /** Standard format for fiat amounts. */
     public static final MonetaryFormat FIAT = new MonetaryFormat().shift(0).minDecimals(2).repeatOptionalDecimals(2, 1);
     /** Currency code for base 1 Bitcoin. */
-    public static final String CODE_BTC = CoinDefinition.coinTicker;//"BTC";
+    public static final String CODE_BTC = "kg/Un";
     /** Currency code for base 1/1000 Bitcoin. */
-    public static final String CODE_MBTC = "m"+CoinDefinition.coinTicker;//"mBTC";
+    public static final String CODE_MBTC = "gm/Un";
     /** Currency code for base 1/1000000 Bitcoin. */
-    public static final String CODE_UBTC = "µ"+ CoinDefinition.coinTicker;//"µBTC";
+    public static final String CODE_UBTC = "mg/Un";
 
     private final char negativeSign;
     private final char positiveSign;

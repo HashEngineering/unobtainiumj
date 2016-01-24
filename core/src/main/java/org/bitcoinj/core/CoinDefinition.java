@@ -17,7 +17,7 @@ public class CoinDefinition {
     public static final String coinTicker = "UNO";
     public static final String coinURIScheme = "unobtanium";
     public static final String cryptsyMarketId = "133";
-    public static final String cryptsyMarketCurrency = "UNO";
+    public static final String cryptsyMarketCurrency = "BTC";
     public static final String PATTERN_PRIVATE_KEY_START = "[8]";
     public static final String PATTERN_PRIVATE_KEY_START_COMPRESSED = "[a]";
     public static final String PATTERN_PRIVATE_KEY_START_TESTNET = "9";
@@ -74,10 +74,7 @@ public class CoinDefinition {
             return INTERVAL * 1000;
 
     }
-    public static int getFullRetargetStartBlock()
-    {
-        return 19200;
-    }
+
     public static final int PROOF_OF_WORK_FORK_BLOCK_MAINNET = 450000;
     public static final int PROOF_OF_WORK_FORK_BLOCK_TESTNET = 50;
     public  static boolean AllowMinDifficultyBlocks = false;
@@ -98,7 +95,7 @@ public class CoinDefinition {
     public static final int MAX_BLOCK_SIZE = 1 * 1000 * 1000;
 
 
-    public static final boolean supportsBloomFiltering = false; //Requires PROTOCOL_VERSION 70000 in the client
+    public static final boolean supportsBloomFiltering = true; //Requires PROTOCOL_VERSION 70000 in the client
     public static boolean supportsIrcDiscovery() {
         return PROTOCOL_VERSION <= 70000;
     }
@@ -133,6 +130,13 @@ public class CoinDefinition {
 
     //net.cpp strDNSSeed
     static public String[] dnsSeeds = new String[] {
+            "104.131.25.221",
+            "108.61.10.90",
+            "137.135.57.119",
+            "144.76.239.66",
+            "144.76.64.123",
+            "158.255.89.244",
+            "162.216.4.199",
             "108.61.10.90",
             "107.170.63.157",
             "192.241.254.222",
